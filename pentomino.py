@@ -28,19 +28,29 @@ GRAY        = (185, 185, 185)
 BLACK       = (  0,   0,   0)
 RED         = (155,   0,   0)
 LIGHTRED    = (175,  20,  20)
-GREEN       = (  0, 155,   0)
-LIGHTGREEN  = ( 20, 175,  20)
+GREEN       = (  0, 155,  10)
+LIGHTGREEN  = ( 20, 175,  30)
 BLUE        = (  0,   0, 155)
 LIGHTBLUE   = ( 20,  20, 175)
-YELLOW      = (155, 155,   0)
-LIGHTYELLOW = (175, 175,  20)
+YELLOW      = (155, 145,   0)
+LIGHTYELLOW = (185, 165,  10)
+ORANGE      = (155,  80,   0)
+LIGHTORANGE = (175, 100,  20)
+CYAN        = (  0, 155, 155)
+LIGHTCYAN   = ( 20, 175, 175)
+VIOLET      = (100,   0, 155)
+LIGHTVIOLET = (120,  20, 175)
+PINK        = (155,   0, 100)
+LIGHTPINK   = (175,  20, 120)
+AQUA        = (  0,  80, 155)
+LIGHTAQUA   = ( 20, 100, 175)
 
 BORDERCOLOR = BLUE
 BGCOLOR = BLACK
 TEXTCOLOR = WHITE
 TEXTSHADOWCOLOR = GRAY
-COLORS      = (     BLUE,      GREEN,      RED,      YELLOW)
-LIGHTCOLORS = (LIGHTBLUE, LIGHTGREEN, LIGHTRED, LIGHTYELLOW)
+COLORS      = (     BLUE,      GREEN,      RED,      YELLOW,      ORANGE,      CYAN,      VIOLET,      PINK,      AQUA)
+LIGHTCOLORS = (LIGHTBLUE, LIGHTGREEN, LIGHTRED, LIGHTYELLOW, LIGHTORANGE, LIGHTCYAN, LIGHTVIOLET, LIGHTPINK, LIGHTAQUA)
 assert len(COLORS) == len(LIGHTCOLORS) # each color must have light color
 
 TEMPLATEWIDTH = 5
@@ -328,17 +338,17 @@ RY_TEMPLATE = [['.....',
                 '.....'],
                ['..O..',
                 '..O..',
-                '..OO.',
-                '..O..',
-                '.....'],
-               ['.....',
-                '.....',
-                '.OOOO',
-                '..O..',
-                '.....'],
-               ['.....',
-                '..O..',
                 '.OO..',
+                '..O..',
+                '.....'],
+               ['.....',
+                '..O..',
+                '.OOOO',
+                '.....',
+                '.....'],
+               ['.....',
+                '..O..',
+                '..OO.',
                 '..O..',
                 '..O..']]
 Z_TEMPLATE = [['.....',
@@ -610,7 +620,16 @@ def getNewPiece():
                 'rotation': random.randint(0, len(PIECES[shape]) - 1),
                 'x': int(BOARDWIDTH / 2) - int(TEMPLATEWIDTH / 2),
                 'y': -2, # start it above the board (i.e. less than 0)
-                'color': random.randint(0, len(COLORS)-1)}
+                'color': 2 if shape in ('T','RY') else
+                4 if shape in ('N','W') else
+                3 if shape in ('P','X') else
+                1 if shape in ('V','Z') else
+                5 if shape in ('Y','L') else
+                8 if shape in ('U','RN') else
+                0 if shape in ('I','RF') else
+                6 if shape in ('J','RZ') else
+                7 if shape in ('F','RP') else
+                random.randint(0, len(COLORS)-1)}
     return newPiece
 
 
